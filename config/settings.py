@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Unfold admin (must be before django.contrib.admin)
+    'unfold',
+    'unfold.contrib.filters',
+    'unfold.contrib.forms',
+    'unfold.contrib.import_export',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,8 +125,85 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Media files
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django Unfold Configuration
+UNFOLD = {
+    "SITE_TITLE": "Items Admin",
+    "SITE_HEADER": "Items Management System",
+    "SITE_URL": "/",
+    "SITE_ICON": {
+        "light": lambda request: "https://img.icons8.com/fluency/48/database.png",
+        "dark": lambda request: "https://img.icons8.com/fluency/48/database.png",
+    },
+    "SITE_LOGO": None,
+    "SITE_SYMBOL": "inventory_2",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": True,
+    "COLORS": {
+        "primary": {
+            "50": "250 245 255",
+            "100": "243 232 255",
+            "200": "233 213 255",
+            "300": "216 180 254",
+            "400": "192 132 252",
+            "500": "168 85 247",
+            "600": "147 51 234",
+            "700": "126 34 206",
+            "800": "107 33 168",
+            "900": "88 28 135",
+            "950": "59 7 100",
+        },
+    },
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇬🇧",
+                "fr": "🇫🇷",
+                "nl": "🇧🇪",
+            },
+        },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+        "navigation": [
+            {
+                "title": "Navigation",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Dashboard",
+                        "icon": "dashboard",
+                        "link": lambda request: "/admin/",
+                    },
+                ],
+            },
+            {
+                "title": "Content Management",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Categories",
+                        "icon": "category",
+                        "link": lambda request: "/admin/items/category/",
+                    },
+                    {
+                        "title": "Items",
+                        "icon": "inventory_2",
+                        "link": lambda request: "/admin/items/item/",
+                    },
+                ],
+            },
+        ],
+    },
+}
