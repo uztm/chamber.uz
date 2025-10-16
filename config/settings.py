@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-jzmp_)q37215uv)8i__2r(e(vjo^)!tq^ge32l@+kshablb66#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['chamber.kassago.uz', 'localhost', '127.0.0.1', "*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://chamber.kassago.uz',
+]
 
 # Application definition
 
